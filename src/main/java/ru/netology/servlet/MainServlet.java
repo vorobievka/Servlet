@@ -12,6 +12,7 @@ import java.util.Set;
 
 public class MainServlet extends HttpServlet {
     private PostController controller;
+
     public enum Method {
         GET,
         POST,
@@ -21,7 +22,7 @@ public class MainServlet extends HttpServlet {
     public static final String GET = "GET";
     public static final String POST = "POST";
     public static final String DELETE = "DELETE";
-    final Set<String> allowedMethods = Set.of(GET, POST, DELETE );
+    final Set<String> allowedMethods = Set.of(GET, POST, DELETE);
 
     @Override
     public void init() {
@@ -39,7 +40,7 @@ public class MainServlet extends HttpServlet {
             // primitive routing
             System.out.println(method);
             if (allowedMethods.contains(method)) {
-                switch(method){
+                switch (method) {
                     case GET:
                         if (path.equals("/api/posts")) {
                             controller.all(resp);
@@ -71,29 +72,6 @@ public class MainServlet extends HttpServlet {
             } else {
                 resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
             }
-            ////////////////////////////////////////////////////////////////////////////
-//            if (method.equals("GET") && path.equals("/api/posts")) {
-//                controller.all(resp);
-//                return;
-//            }
-//            if (method.equals("GET") && path.matches("/api/posts/\\d+")) {
-//                // easy way
-//                final var id = Long.parseLong(path.substring(path.lastIndexOf("/")));
-//                controller.getById(id, resp);
-//                return;
-//            }
-//            if (method.equals("POST") && path.equals("/api/posts")) {
-//                controller.save(req.getReader(), resp);
-//                return;
-//            }
-//            if (method.equals("DELETE") && path.matches("/api/posts/\\d+")) {
-//                // easy way
-//                final var id = Long.parseLong(path.substring(path.lastIndexOf("/")));
-//                controller.removeById(id, resp);
-//                return;
-//            }
-         //   resp.setStatus(HttpServletResponse.SC_NOT_FOUND);
-            /////////////////////////////////////////////////////////
         } catch (Exception e) {
             e.printStackTrace();
             resp.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);

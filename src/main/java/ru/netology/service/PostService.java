@@ -26,7 +26,7 @@ public class PostService {
     }
 
     public boolean removeById(long id) {
-        if(repository.removeById(id)) {
+        if (repository.removeById(id)) {
             return true;
         } else {
             return false;

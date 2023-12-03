@@ -24,11 +24,12 @@ public class PostController {
         response.getWriter().print(gson.toJson(data));
     }
 
-    public void getById(long id, HttpServletResponse response) throws IOException{
+    public void getById(long id, HttpServletResponse response) throws IOException {
         // TODO: deserialize request & serialize response
         response.setContentType(APPLICATION_JSON);
         final var gson = new Gson();
-        final var data = service.getById(id);;
+        final var data = service.getById(id);
+        ;
         response.getWriter().print(gson.toJson(data));
     }
 
@@ -42,13 +43,14 @@ public class PostController {
 
     public void removeById(long id, HttpServletResponse response) throws IOException {
         // TODO: deserialize request & serialize response
-        if(service.removeById(id)){
+        if (service.removeById(id)) {
             response.setStatus(HttpServletResponse.SC_OK);
             response.setContentType("text/plain");
             response.getWriter().println("Post deleted");
         } else {
             response.setStatus(HttpServletResponse.SC_NOT_FOUND);
             response.setContentType("text/plain");
-            response.getWriter().println("Post not found");}
+            response.getWriter().println("Post not found");
+        }
     }
 }
